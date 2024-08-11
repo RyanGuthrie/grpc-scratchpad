@@ -1,26 +1,20 @@
 syntax = "proto3";
 
 option java_multiple_files = true;
-option java_package = "net.ryanguthrie.grpc.server";
-option java_outer_classname = "GRPCServer";
-option objc_class_prefix = "HLW";
+option java_package = "net.ryanguthrie.grpc.proto";
+option java_outer_classname = "Server";
 
-package helloworld;
+package grpc_proto;
 
-// The greeting service definition.
-service Greeter {
-  // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply) {}
+service Service {
+  rpc Shutdown (ShutdownRequest) returns (ShutdownResponse) {}
 }
 
-// The request message containing the user's name.
-message HelloRequest {
-  string name = 1;
-  string boo = 2;
-  string foo = 3;
+message ShutdownRequest {
+  string requestor = 1;
+  uint32 after_ms = 2;
 }
 
-// The response message containing the greetings
-message HelloReply {
+message ShutdownResponse {
   string message = 1;
 }

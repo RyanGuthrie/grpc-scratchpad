@@ -10,14 +10,21 @@ public class ServerMain {
     public static void main(String[] args) throws IOException, InterruptedException {
         int port = 3000;
 
-        HostnameGreeter greater = new HostnameGreeter("localhost");
+        ManagementService greater = new ManagementService();
 
         Server server = Grpc.newServerBuilderForPort(port, InsecureServerCredentials.create())
                 .addService(greater)
                 .build()
                 .start();
 
+        greater.shutdownCallback(() -> {
+            System.out.println("Calling shutdown");
+            server.shutdown();
+            System.out.println("Called shutdown");
+        });
+
         System.out.println("Listening on port " + port);
-        Thread.sleep(10000);
+        server.awaitTermination();
+        System.out.println("Server shutting down");
     }
 }

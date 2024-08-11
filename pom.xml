@@ -22,7 +22,6 @@
                 <version>3.3.0</version>
                 <executions>
                     <execution>
-                        <id>test</id>
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>add-source</goal>
