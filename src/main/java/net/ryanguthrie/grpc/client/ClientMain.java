@@ -8,7 +8,7 @@ import net.ryanguthrie.grpc.proto.ShutdownRequest;
 
 public class ClientMain {
     public static void main(String[] args) {
-        String target = "localhost:3000";
+        String target = "localhost:3001";
 
         ManagedChannel channel1 = Grpc.newChannelBuilder(target, InsecureChannelCredentials.create()).build();
 
@@ -18,7 +18,7 @@ public class ClientMain {
 
         var shutdownReq = ShutdownRequest.newBuilder()
                 .setRequestor("Ryan Guthrie")
-                .setAfterMs(3000)
+                .setAfterMs(5000)
                 .build();
 
         var shutdownRes = blockingStub.shutdown(shutdownReq);
